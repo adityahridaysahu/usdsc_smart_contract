@@ -210,22 +210,3 @@ abstract contract ServicePayer {
 }
 
 
-contract BEP20_USDSC is BEP20, ServicePayer {
-
-    constructor (
-        string memory name,
-        string memory symbol,
-        uint8 decimals,
-        uint256 initialBalance,
-        address payable feeReceiver
-    )
-        BEP20(name, symbol)
-        ServicePayer(feeReceiver, "StandardBEP20")
-        payable
-    {
-        require(initialBalance > 0, "StandardBEP20: supply cannot be zero");
-
-        _setupDecimals(decimals);
-        _mint(_msgSender(), initialBalance);
-    }
-}
